@@ -16,11 +16,11 @@ const List = () => {
         </div>
     )
     return ( 
-        <>
+        <div className="flex">
             <Card title={titulo} footer={footer}>
                 <h1 className="mx-auto flex flex-column text-center">0 <span className="text-sm">/0</span></h1>
             </Card>
-        </>
+        </div>
      );
 }
  
