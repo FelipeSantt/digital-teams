@@ -9,9 +9,9 @@ const Header = () => {
             <div className="logo">
                 <h1>Logo</h1>
             </div>
-            <div className="pesquisa relative">
-                <i className={'pi pi-search absolute z-index-1 right-0 top-50 -mt-2 mr-2'}/>
-                <InputText/>
+            <div className="pesquisa relative w-4">
+                <i className={'pi pi-search absolute z-index-1 right-0 top-50 -mt-2 mr-3'}/>
+                <InputText className='w-full' placeholder='Pesquisar por nome'/>
             </div>
         </header>
      );
