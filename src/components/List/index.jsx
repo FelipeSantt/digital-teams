@@ -1,12 +1,14 @@
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import { Sidebar } from 'primereact/sidebar';
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Dialog } from 'primereact/dialog';
 import {ConfirmDialog, confirmDialog} from 'primereact/confirmdialog';
 import { InputText } from "primereact/inputtext";
 import { InputMask } from 'primereact/inputmask';
 import { useForm } from "react-hook-form";
+import { useRef } from "react";
+import { FilterContext } from "../../App";
         
         
         
@@ -17,8 +19,15 @@ const List = () => {
     const [mostrarDialog, setMostrarDialog] = useState(false);
     const [mostrarSidebarAdd, setMostrarSidebarAdd] = useState(false);
     const [teams,setTeams] = useState([]);
+    const { filter } = useContext(FilterContext);
+    const [teamsFiltered,setTeamsFiltered] = useState([]);
+    const teamSelected = useRef();
 
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset } = useForm({
+        defaultValues: {
+            participantes:[]
+        }
+      });
     const { register: registerP, handleSubmit: handleSubmitP, reset: resetP, setValue: setValueP } = useForm();
 
      async function cadastrar(dados) {
@@ -35,9 +44,23 @@ const List = () => {
         buscarTeams();
     }
 
-    function addParticipante(dados) {
-        setMostrarSidebar(false);
-        buscarTeams();
+    async function addParticipante(dados) {
+        const team = teams.find(team => team.id == dados.id);
+        team.participantes.push(dados.nome)
+        const request = await fetch(`http://localhost:3030/teams/${dados.id}`, {
+            method: "put",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(team)
+        });
+        const response = await request.json();
+        if(response){
+            resetP();
+            buscarTeams();
+        }
+        // setMostrarSidebar(false);
+        // buscarTeams();
     }
 
     function confirmacao(id){
@@ -63,15 +86,27 @@ const List = () => {
         setTeams(response);
     }
 
+
     useEffect(() => {
         buscarTeams();
     },[]);
 
-    const titulo = (nome) => (
+    useEffect(() => {
+        if(filter != ""){
+            setTeamsFiltered([...teams.filter((team) => team.nome.toLowerCase().includes(filter.toLowerCase()))]);
+            return;
+        }
+        setTeamsFiltered(teams)
+    }, [filter, teams])
+
+    const titulo = (nome, id) => (
         <div className="flex justify-content-between align-items-center text-lg">
             {nome}
             <i className="pi pi-eye cursor-pointer" 
-                onClick={() => setMostrarDialog(true)}>
+                onClick={() => {
+                    teamSelected.current = id;
+                    setMostrarDialog(true)
+                }}>
             </i>
         </div>
     );
@@ -101,14 +136,14 @@ const List = () => {
             </h2>
             
             {teams && 
-                teams.map((team) => (
+                teamsFiltered.map((team) => (
                     <Card 
                         key={`team${team.id}`}
                         style={{width: 'calc(20% - 13px)'}}
-                        title={titulo(team.nome)}
+                        title={titulo(team.nome,team.id)}
                         footer={footer(team.id)}
                     >
-                        <h1 className="mx-auto flex flex-column text-center">{team.participantes.length}<span className="text-sm">/{team.capacidade}</span></h1>
+                        <h1 className="mx-auto h-6rem w-6rem flex flex-column text-center justify-content-center border-circle bg-primary">{team.participantes.length}<span className="text-sm">/{team.capacidade}</span></h1>
                     </Card>
                 ))
             }
@@ -167,8 +202,15 @@ const List = () => {
                 visible={mostrarDialog}
                 onHide={() => setMostrarDialog(false)}
                 style={{width: '50%'}}
+                header={<h2>{teamSelected.current && teams.find(team => team.id == teamSelected.current).nome}</h2>}
             >
-                
+                {
+                    teamSelected.current && teams.find(team => team.id == teamSelected.current).participantes.map((nome, index) => (
+                        <h5 key={index} className="flex justify-content-between align-items-center">
+                            {nome} <i className="pi pi-trash" onClick={() => alert("Deletou!")}></i>
+                        </h5>
+                    ))
+                }
             </Dialog>
             <ConfirmDialog />
         </section>

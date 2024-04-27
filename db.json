@@ -4,19 +4,32 @@
       "id": "1",
       "nome": "team fs07",
       "capacidade": 20,
-      "participantes": []
+      "participantes": [
+        "Felipe",
+        "Felipe",
+        "Bruno",
+        "Bruno",
+        "Bruno",
+        "Felipe",
+        "Felipe"
+      ]
     },
     {
       "id": "3",
       "nome": "team fs15",
       "capacidade": 30,
-      "participantes": []
+      "participantes": [
+        "Rafael"
+      ]
     },
     {
       "id": "1d9f",
       "nome": "Fs-09",
       "capacidade": "10",
-      "participantes": []
+      "participantes": [
+        "Felipe",
+        "bruno"
+      ]
     },
     {
       "id": "a374",
@@ -31,16 +44,10 @@
       "participantes": []
     },
     {
-      "id": "cb83",
-      "nome": "Os Abençoados",
-      "capacidade": "10",
-      "participantes": []
-    },
-    {
-      "id": "cdfa",
-      "nome": "Os Casca de Bala",
-      "capacidade": "02",
-      "participantes": []
+      "id": "03f4",
+      "participantes": [],
+      "nome": "Flamengo",
+      "capacidade": "10"
     }
   ]
 }
