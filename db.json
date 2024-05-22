@@ -1,53 +1,12 @@
 {
   "teams": [
     {
-      "id": "1",
-      "nome": "team fs07",
-      "capacidade": 20,
+      "id": "6f88",
       "participantes": [
-        "Felipe",
-        "Felipe",
-        "Bruno",
-        "Bruno",
-        "Bruno",
-        "Felipe",
         "Felipe"
-      ]
-    },
-    {
-      "id": "3",
-      "nome": "team fs15",
-      "capacidade": 30,
-      "participantes": [
-        "Rafael"
-      ]
-    },
-    {
-      "id": "1d9f",
-      "nome": "Fs-09",
-      "capacidade": "10",
-      "participantes": [
-        "Felipe",
-        "bruno"
-      ]
-    },
-    {
-      "id": "a374",
-      "nome": "Fs-08",
-      "capacidade": "08",
-      "participantes": []
-    },
-    {
-      "id": "045f",
-      "nome": "Turma-frente",
-      "capacidade": "10",
-      "participantes": []
-    },
-    {
-      "id": "03f4",
-      "participantes": [],
-      "nome": "Flamengo",
-      "capacidade": "10"
+      ],
+      "nome": "Teste",
+      "capacidade": "08"
     }
   ]
 }

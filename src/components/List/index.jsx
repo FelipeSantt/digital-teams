@@ -79,6 +79,22 @@ const List = () => {
           },
         });
     }
+    function deletarParticipante(dados){
+        confirmDialog({
+            header:'Aviso:',
+            message:'Deseja realmente apagar este item?',
+            acceptLabel:'Sim',
+            rejectLabel:'Não',
+            accept: async () => {
+            await fetch(`http://localhost:3030/teams/${dados.id}`,{
+                method: 'delete'
+            })
+            .finally(() => {
+                buscarTeams();
+            });
+          },
+        });
+    }
 
     async function buscarTeams() {
         const request = await fetch("http://localhost:3030/teams");
@@ -207,7 +223,7 @@ const List = () => {
                 {
                     teamSelected.current && teams.find(team => team.id == teamSelected.current).participantes.map((nome, index) => (
                         <h5 key={index} className="flex justify-content-between align-items-center">
-                            {nome} <i className="pi pi-trash" onClick={() => alert("Deletou!")}></i>
+                            {nome} <i className="pi pi-trash cursor-pointer" onClick={() => deletarParticipante(dados)}></i>
                         </h5>
                     ))
                 }
