@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "db": "npx json-server db.json --watch --port 3030"
+    "db": "npx json-server db.json --watch --port 3030",
+    "vercel-build": "npx json-server db.json --watch --port 3030"
   },
   "dependencies": {
     "json-server": "^1.0.0-alpha.23",
