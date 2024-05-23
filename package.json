@@ -9,7 +9,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "db": "npx json-server db.json --watch --port 3030",
-    "vercel-build": "npm run db"
+    "vercel-build": "npx db.json migrate deploy"
   },
   "dependencies": {
     "json-server": "^1.0.0-alpha.23",
